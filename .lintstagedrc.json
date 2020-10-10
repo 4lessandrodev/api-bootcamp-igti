@@ -1,0 +1,7 @@
+  
+{
+    "*.ts": [
+     "eslint 'src/**' --fix --max-warnings 0 .",
+     "npm run test:staged"
+    ]
+}
