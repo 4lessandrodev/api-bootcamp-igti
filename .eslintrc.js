@@ -2,7 +2,7 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    jest:true
+    jest: true
   },
   extends: [
     'standard'
@@ -16,12 +16,12 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
-      "@typescript-eslint/strict-boolean-expressions":"off",
-      "@typescript-eslint/consistent-type-definitions":"off",
-      "@typescript-eslint/comma-spacing":"off",
-      "@typescript-eslint/method-signature-style":"off",
-      "@typescript-eslint/semi":"off"
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off',
+    '@typescript-eslint/comma-spacing': 'off',
+    '@typescript-eslint/method-signature-style': 'off',
+    '@typescript-eslint/semi': 'off'
   }
-}
+};
