@@ -1,8 +1,8 @@
 import {
   createNewFile, deleteFile, verifyIfFileExists,
   readFile, reWriteFile, savaNewDataOnFile, findRegistes, minusId
-} from './initData';
-import { env } from '../config/env';
+} from './json-repository';
+import { env } from '../../config/env';
 
 describe('Initi Data', () => {
   test('Deve retornar false se um arquivo json não existir', async () => {

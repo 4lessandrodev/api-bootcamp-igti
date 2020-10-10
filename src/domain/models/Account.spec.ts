@@ -1,4 +1,4 @@
-import { deleteFile } from '../../infra/middlewares/initData';
+import { deleteFile } from '../../infra/repositories/json/json-repository';
 import { Account } from './Account';
 
 describe('Account', () => {

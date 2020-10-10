@@ -4,7 +4,7 @@ import {
   findRegistes,
   savaNewDataOnFile,
   updateDataFile
-} from '../../infra/middlewares/initData';
+} from '../../infra/repositories/json/json-repository';
 import { EntityMethods } from '../interfaces/EntityMethods';
 
 export class Account implements EntityMethods {

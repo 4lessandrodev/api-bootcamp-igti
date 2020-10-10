@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, existsSync, unlinkSync } from 'fs';
 import path from 'path';
-import { env } from '../config/env';
+import { env } from '../../config/env';
 import { IDefaultData } from './IDefaultData';
 
 export const verifyIfFileExists = async (filename: string):Promise<boolean> => {
