@@ -43,27 +43,27 @@ export const updateDataFile = async (filename:string, data:any):Promise<any> => 
 };
 
 export const reWriteFile = async (filename:string, defaultData: Array<object>) => {
-  writeFileSync(path.join('.', 'src', 'infra', 'data', `${filename}.json`), JSON.stringify({ defaultData }), 'utf-8');
+  writeFileSync(path.join('.', 'src', 'infra', 'data', `${filename}.json`), JSON.stringify({ defaultData }, null, 2), 'utf-8');
 };
 
-export const savaNewDataOnFile = async (filename: string, data: any): Promise<number> => {
+export const savaNewDataOnFile = async (filename: string, data: any): Promise<any> => {
   if ((await verifyIfFileExists(filename))) {
-    const file = await readFile(filename);
-    data.id = file[0].nextId;
-    file[0].nextId = sumId(file);
-    file[0].data.push(data);
-
-    await reWriteFile(filename, file);
-    return data.id;
+    const _data = await readFile(filename);
+    const id = _data[0].nextId;
+    data.id = id;
+    _data[0].nextId = _data[0].nextId + 1;
+    _data[0].data.push(data);
+    await reWriteFile(filename, _data);
+    return data;
   } else {
     await createNewFile(filename, env.defaultData);
-    const file = await readFile(filename);
-    data.id = file[0].nextId;
-    file[0].nextId = sumId(file);
-    file[0].data.push(data);
-
-    await reWriteFile(filename, file);
-    return data.id;
+    const _data = await readFile(filename);
+    const id = _data[0].nextId;
+    data.id = id;
+    _data[0].nextId = _data[0].nextId + 1;
+    _data[0].data.push(data);
+    await reWriteFile(filename, _data);
+    return data;
   }
 };
 
@@ -74,7 +74,7 @@ export const deleteDataOnFile = async (filename:string, data:any):Promise<any> =
     const indexRegisterToDelete = jsonRegisters.findIndex((register) => register.id === data.id);
     if (indexRegisterToDelete !== -1) {
       jsonRegisters.splice(indexRegisterToDelete, 1);
-      file[0].nextId = minusId(file);
+      file[0].nextId--;
       await reWriteFile(filename, file);
     }
   }
@@ -98,16 +98,4 @@ export const findRegistes = async (filename:string):Promise<Array<any>> => {
     return file[0].data;
   }
   return [];
-};
-
-export const minusId = (file:Array<IDefaultData>):number => {
-  if (file[0].nextId === 1) {
-    return 1;
-  } else {
-    return file[0].nextId + 1;
-  };
-};
-
-const sumId = (file: Array<IDefaultData>): number => {
-  return file[0].nextId + 1;
 };

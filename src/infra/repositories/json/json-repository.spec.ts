@@ -1,6 +1,6 @@
 import {
   createNewFile, deleteFile, verifyIfFileExists,
-  readFile, reWriteFile, savaNewDataOnFile, findRegistes, minusId
+  readFile, reWriteFile, savaNewDataOnFile, findRegistes
 } from './json-repository';
 import { env } from '../../config/env';
 
@@ -39,17 +39,12 @@ describe('Initi Data', () => {
 
   test('Deve criar um novo arquivo se tentar salvar um registro em arquivo inexistente', async () => {
     await createNewFile('default', env.defaultData);
-    const createdId = await savaNewDataOnFile('default', { text: 'Hello World', id: null });
-    expect(createdId).toBeGreaterThan(0);
+    const data = await savaNewDataOnFile('default', { text: 'Hello World', id: null });
+    expect(data.id).toBeGreaterThan(0);
   });
 
   test('Deve retornar um array vazio se o arquivo não existir', async () => {
     const createdId = await findRegistes('file_not_exist');
     expect(createdId).toEqual([]);
-  });
-
-  test('Se eu tentar diminuir um número em array vazio, deve retornar o id 1', async () => {
-    const id = minusId(env.defaultData);
-    expect(id).toEqual(1);
   });
 });
