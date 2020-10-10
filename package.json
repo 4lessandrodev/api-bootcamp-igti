@@ -4,8 +4,12 @@
   "description": "Api simulação de conta bancária - Curso FullStack IGTI",
   "main": "index.js",
   "scripts": {
-    "test:stage": "jest",
-    "test": "jest"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:live": "jest --passWithNoTests --watch",
+    "test:staged": "jest --passWithNoTests --findRelatedTests",
+    "test:ci":"jest --passWithNoTests --silent --noStackTrace --runInBand --coverage",
+    "dev:server": "ts-node-dev --respawn --transpile-only src/infra/server.ts"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,7 @@
   "devDependencies": {
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.8",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.11.0",
