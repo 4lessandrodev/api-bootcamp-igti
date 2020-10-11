@@ -3,9 +3,11 @@ import accountRoutes from '../interface/routes/account';
 import { env } from './config/env';
 import { logger } from './middlewares/loggerMiddleware';
 import { errorMiddleware } from './middlewares/routerErrorsMiddleware';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/accounts/', accountRoutes);
 app.use(errorMiddleware);
