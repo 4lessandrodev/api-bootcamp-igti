@@ -1,11 +1,13 @@
 import { findById, findAll, deleteAccountById, saveNewAccount, updateAccountById } from '../../infra/repositories/json/account-repository';
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
+import { logger } from '../../infra/middlewares/loggerMiddleware';
 
 const checkErrors = async (req:Request, res:Response) => {
   if (!validationResult(req).isEmpty()) {
     const errors = validationResult(req).array();
     res.status(422).json(errors);
+    logger.http(`requisição recusada pela validação: ${JSON.stringify(errors)}`);
     return true;
   }
   return false;
@@ -45,7 +47,9 @@ export const accountController = {
       if (!(await checkErrors(req, res))) {
         const { user, saldo } = req.body;
         const numberSaldo = parseFloat(saldo);
-        res.status(200).json(await saveNewAccount('accounts', { user, saldo: numberSaldo, id: 0 }));
+        const newAccount = await saveNewAccount('accounts', { user, saldo: numberSaldo, id: 0 });
+        res.status(200).json(newAccount);
+        logger.info(`Nova conta salva ${JSON.stringify(newAccount)}`);
       }
     } catch (error) {
       next(error);
@@ -57,7 +61,9 @@ export const accountController = {
         const id = parseInt(req.params.id);
         const { user, saldo } = req.body;
         const numberSaldo = parseFloat(saldo);
-        res.status(200).json(await updateAccountById('accounts', { user, saldo: numberSaldo, id }));
+        const updatadeAccount = await updateAccountById('accounts', { user, saldo: numberSaldo, id });
+        res.status(200).json(updatadeAccount);
+        logger.info(`Account atualizada ${JSON.stringify(updatadeAccount)}`);
       }
     } catch (error) {
       next(error);

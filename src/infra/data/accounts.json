@@ -1,0 +1,19 @@
+{
+  "defaultData": [
+    {
+      "nextId": 3,
+      "data": [
+        {
+          "user": "Alenes",
+          "saldo": 5230,
+          "id": 1
+        },
+        {
+          "user": "Aline",
+          "saldo": 10890,
+          "id": 2
+        }
+      ]
+    }
+  ]
+}
