@@ -19,8 +19,7 @@ export const accountController = {
         res.status(200).json(await findById('accounts', id));
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json(error.message);
+      next(error);
     }
   },
   findAll: async (req: Request, res: Response, next: NextFunction) => {
@@ -28,8 +27,7 @@ export const accountController = {
       const data = await findAll('accounts');
       res.status(200).json(data[0].data);
     } catch (error) {
-      console.log(error);
-      res.status(500).json(error.message);
+      next(error);
     }
   },
   deleteAccountById: async (req: Request, res: Response, next: NextFunction) => {
@@ -39,8 +37,7 @@ export const accountController = {
         res.status(200).json(await deleteAccountById('accounts', id));
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json(error.message);
+      next(error);
     }
   },
   savaNewAccount: async (req: Request, res: Response, next: NextFunction) => {
@@ -51,8 +48,7 @@ export const accountController = {
         res.status(200).json(await saveNewAccount('accounts', { user, saldo: numberSaldo, id: 0 }));
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json(error.message);
+      next(error);
     }
   },
   updateAccountById: async (req: Request, res: Response, next: NextFunction) => {
@@ -64,8 +60,7 @@ export const accountController = {
         res.status(200).json(await updateAccountById('accounts', { user, saldo: numberSaldo, id }));
       }
     } catch (error) {
-      console.log(error);
-      res.status(500).json(error.message);
+      next(error);
     }
   }
 };
