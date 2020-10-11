@@ -1,3 +1,4 @@
+
 import { saveNewAccount, findById, updateAccountById, findAll, deleteAccountById } from '../../infra/repositories/json/account-repository';
 import { deleteFile } from '../../infra/repositories/json/utils/json-repository';
 import { Account } from './Account';
@@ -15,9 +16,18 @@ describe('Account', () => {
 
   test('Deve atualizar o registro', async () => {
     const account = Account.init('Luan Jean', 50250, 1);
-    await account.update('accounts', account, { updateAccountById });
+    const accountUpdated = await account.update('accounts', account, { updateAccountById });
+    expect(accountUpdated).toEqual({ id: 1, user: 'Luan Jean', saldo: 50250 });
+  });
+
+  test('Deve buscar um registro pelo id', async () => {
     const accountUpdated = await Account.findById('accounts', 1, { findById });
     expect(accountUpdated).toEqual({ id: 1, user: 'Luan Jean', saldo: 50250 });
+  });
+
+  test('Deve retornar nulo se tentar buscar um registro que não existe', async () => {
+    const notExistAccount = await Account.findById('accounts', 1000, { findById });
+    expect(notExistAccount).toEqual(null);
   });
 
   test('Deve listar todos os registro', async () => {

@@ -2,7 +2,7 @@ import { IDeleteAccountRepository, ISaveAccountRepository, IUpdateAccountReposit
 import { IAccount } from './IAccount';
 
 export interface IAccountMethods{
- update(filename: string, element: IAccount, controller: IUpdateAccountRepository): Promise<void>
+ update(filename: string, element: IAccount, controller: IUpdateAccountRepository): Promise<IAccount | null>
  save(filename: string, element: IAccount, controller:ISaveAccountRepository): Promise<IAccount>
  delete(filename: string, id: number, controller: IDeleteAccountRepository): Promise<void>
 }

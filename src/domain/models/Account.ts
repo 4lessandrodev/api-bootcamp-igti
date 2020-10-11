@@ -16,8 +16,8 @@ export class Account implements IAccountMethods {
     return new Account(user, saldo, id);
   }
 
-  async update (filename: string, account: IAccount, controller:IUpdateAccountRepository): Promise<void> {
-    await controller.updateAccountById(filename, account);
+  async update (filename: string, account: IAccount, controller:IUpdateAccountRepository): Promise<IAccount | null> {
+    return await controller.updateAccountById(filename, account);
   }
 
   async save (filename: string, account: IAccount, controller:ISaveAccountRepository): Promise<IAccount> {
