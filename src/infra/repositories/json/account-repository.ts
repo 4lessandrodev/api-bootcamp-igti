@@ -2,10 +2,10 @@ import { readFileSync } from 'fs';
 import path from 'path';
 import { IAccount } from '../../../domain/interfaces/IAccount';
 import { env } from '../../config/env';
-import { IDefaultData } from './utils/IDefaultData';
+import { IDefaultAccountData } from './utils/IDefaultAccount';
 import { createNewFile, reWriteFile, verifyIfFileExists } from './utils/json-repository';
 
-export const findAll = async (filename: string): Promise<Array<IDefaultData>> => {
+export const findAll = async (filename: string): Promise<Array<IDefaultAccountData>> => {
   if ((await verifyIfFileExists(filename))) {
     const _filename = path.join('.', 'src', 'infra', 'data', `${filename}.json`);
     const object = JSON.parse(readFileSync(_filename, 'utf-8'));

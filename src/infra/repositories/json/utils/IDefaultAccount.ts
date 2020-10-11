@@ -1,6 +1,6 @@
 import { IAccount } from '../../../../domain/interfaces/IAccount';
 
-export interface IDefaultData{
+export interface IDefaultAccountData{
  nextId: number
  data:Array<IAccount>
 }

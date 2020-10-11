@@ -1,5 +1,5 @@
 import { IAccount } from '../../../domain/interfaces/IAccount';
-import { IDefaultData } from '../json/utils/IDefaultData';
+import { IDefaultAccountData } from '../json/utils/IDefaultAccount';
 
 export interface IDeleteAccountRepository{
 deleteAccountById (filename: string, id: number): Promise<boolean>
@@ -14,7 +14,7 @@ export interface ISaveAccountRepository{
 }
 
 export interface IFindAllAccountsRepository {
-findAll(filename:string):Promise<Array<IDefaultData>>
+findAll(filename:string):Promise<Array<IDefaultAccountData>>
 }
 
 export interface IFindByIdAccountRepository{
