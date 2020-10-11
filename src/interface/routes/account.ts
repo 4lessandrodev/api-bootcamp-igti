@@ -1,6 +1,6 @@
 import express from 'express';
 import { accountController } from '../controller/accountController';
-import { validation } from '../../domain/validations/account-validations';
+import { validation } from '../../domain/validations/validations';
 const router = express.Router();
 
 router.get('/', accountController.findAll);
