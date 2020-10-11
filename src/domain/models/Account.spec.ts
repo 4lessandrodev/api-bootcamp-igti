@@ -1,4 +1,5 @@
-import { deleteFile } from '../../infra/repositories/json/json-repository';
+import { saveNewAccount, findById, updateAccountById, findAll, deleteAccountById } from '../../infra/repositories/json/account-repository';
+import { deleteFile } from '../../infra/repositories/json/utils/json-repository';
 import { Account } from './Account';
 
 describe('Account', () => {
@@ -6,29 +7,32 @@ describe('Account', () => {
   afterAll(async () => await deleteFile('accounts'));
 
   test('Deve salvar um novo registro', async () => {
-    const account = Account.init('Lucas Almeida', 1020);
-    const savedData = await account.save('accounts', account);
-    const accountCreated = await Account.findById('accounts', savedData.id);
-    expect(accountCreated).toEqual({ id: savedData.id, user: 'Lucas Almeida', saldo: 1020 });
+    const account = Account.init('Alessandro', 17200, 1);
+    const savedData = await account.save('accounts', account, { saveNewAccount });
+    const accountCreated = await Account.findById('accounts', savedData.id, { findById });
+    expect(accountCreated).toEqual({ id: savedData.id, user: 'Alessandro', saldo: 17200 });
   });
 
   test('Deve atualizar o registro', async () => {
-    const account = Account.init('Luan Jean', 1025, 1);
-    await account.update('accounts', account);
-    const accountUpdated = await Account.findById('accounts', 1);
-    expect(accountUpdated).toEqual({ id: 1, user: 'Luan Jean', saldo: 1025 });
+    const account = Account.init('Luan Jean', 50250, 1);
+    await account.update('accounts', account, { updateAccountById });
+    const accountUpdated = await Account.findById('accounts', 1, { findById });
+    expect(accountUpdated).toEqual({ id: 1, user: 'Luan Jean', saldo: 50250 });
   });
 
   test('Deve listar todos os registro', async () => {
-    const accounts = await Account.findAll('accounts');
+    const accounts = await Account.findAll('accounts', { findAll });
     expect(accounts?.length).toBeGreaterThanOrEqual(0);
   });
 
   test('Deve excluir um registro', async () => {
-    const acc = await Account.findById('accounts', 1);
-    const account = Account.init(acc.user, acc.saldo, acc.id);
-    await account.delete('accounts', acc);
-    const accDeleted = await Account.findById('accounts', 1);
-    expect(accDeleted).toEqual({});
+    const acc = await Account.findById('accounts', 1, { findById });
+    expect(acc).not.toBeNull();
+    if (acc) {
+      const account = Account.init(acc?.user, acc?.saldo, acc?.id);
+      await account.delete('accounts', acc?.id, { deleteAccountById });
+      const accDeleted = await Account.findById('accounts', 1, { findById });
+      expect(accDeleted).toBeNull();
+    }
   });
 });

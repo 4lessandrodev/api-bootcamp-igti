@@ -1,6 +1,8 @@
 module.exports = {
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
+    '<rootDir>/src/domain/models/**/*.ts',
+    '<rootDir>/src/infra/repositories/json/**/*.ts',
+    '<rootDir>/src/interface/controller/**/*.ts',
     '!<rootDir>/src/main/**',
     '!<rootDir>/src/**/*spec.ts',
     '!<rootDir>/src/**/*test.ts',

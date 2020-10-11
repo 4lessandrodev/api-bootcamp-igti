@@ -1,8 +1,4 @@
-import {
-  createNewFile, deleteFile, verifyIfFileExists,
-  readFile, reWriteFile, savaNewDataOnFile, findRegistes
-} from './json-repository';
-import { env } from '../../config/env';
+import { createNewFile, deleteFile, verifyIfFileExists } from './utils/json-repository';
 
 describe('Initi Data', () => {
   test('Deve retornar false se um arquivo json não existir', async () => {
@@ -11,15 +7,9 @@ describe('Initi Data', () => {
   });
 
   test('Deve criar um arquivo se ele não existir', async () => {
-    await createNewFile('account', env.defaultData);
+    await createNewFile('account');
     const exist = await verifyIfFileExists('account');
     expect(exist).toBe(true);
-  });
-
-  test('Deve reescrever os valores de um arquivo', async () => {
-    await reWriteFile('account', [{ text: 'hello world' }]);
-    const dataRewrote = await readFile('account');
-    expect(dataRewrote).toEqual([{ text: 'hello world' }]);
   });
 
   test('Deve retornar true quando excluir um aqruivo existente', async () => {
@@ -30,21 +20,5 @@ describe('Initi Data', () => {
   test('Deve retornar false quando tentar excluir um aqruivo inexistente', async () => {
     const deleted = await deleteFile('not_exist_file');
     expect(deleted).toBe(false);
-  });
-
-  test('Deve retornar um array padrão se o tentar ler um arquivo inexistente ', async () => {
-    const readDefaultData = await readFile('not_exist_file');
-    expect(readDefaultData).toEqual(env.defaultData);
-  });
-
-  test('Deve criar um novo arquivo se tentar salvar um registro em arquivo inexistente', async () => {
-    await createNewFile('default', env.defaultData);
-    const data = await savaNewDataOnFile('default', { text: 'Hello World', id: null });
-    expect(data.id).toBeGreaterThan(0);
-  });
-
-  test('Deve retornar um array vazio se o arquivo não existir', async () => {
-    const createdId = await findRegistes('file_not_exist');
-    expect(createdId).toEqual([]);
   });
 });
