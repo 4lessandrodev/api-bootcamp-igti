@@ -1,16 +1,18 @@
 name: CI
 on:
   push:
-    branches: [ main ]
+    branches: [ main, development ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, development ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          node-version: '12'
 
       # Runs a single command using the runners shell
       - name: Instalar dependências
