@@ -1,5 +1,5 @@
 export interface IGrade {
-  readonly id: number|null
+  id: number|null
   readonly student: string
   readonly subject: string
   readonly type: string
