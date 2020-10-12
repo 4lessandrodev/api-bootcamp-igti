@@ -3,7 +3,7 @@ import { IAccount } from '../interfaces/IAccount';
 import { IDeleteAccountRepository, IFindAllAccountsRepository, IFindByIdAccountRepository, ISaveAccountRepository, IUpdateAccountRepository } from '../../infra/repositories/interfaces/IAccountRepository';
 
 export class Account implements IAccountMethods {
-  readonly id: number;
+  public id: number;
   readonly user: string;
   readonly saldo: number
   private constructor (user:string, saldo:number, id: number) {

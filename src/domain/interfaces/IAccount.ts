@@ -1,5 +1,5 @@
 export interface IAccount {
- readonly id: number
+ id: number
  readonly user: string
  readonly saldo:number
 }

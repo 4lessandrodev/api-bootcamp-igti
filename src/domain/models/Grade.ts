@@ -8,7 +8,7 @@ import { IGrade } from '../interfaces/IGrade';
 import { IGradetMethods } from '../interfaces/IGradeMthods';
 
 export class Grade implements IGradetMethods {
- readonly id: number|null
+ public id: number|null
  readonly student: string
  readonly subject: string
  readonly type: string
