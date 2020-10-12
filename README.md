@@ -1,11 +1,11 @@
 # api-bootcamp-igti
 
-##### O que tem de interessante neste projeto
+#### O que tem de interessante neste projeto
 
-- Projeto desenvolvido em todo em typscript
+- Projeto desenvolvido todo em typscript
 - Gerenciamento de erros > infra > middleware
 - Validação de fields > domain > validation
-- Gerenciamento de logs > > infra > middleware
+- Gerenciamento de logs > infra > middleware
 - Testes de domínio e repositorios
 - Hooks validando testes e eslint em commits e push
 - As models foram desenvolvidas mediante injeção de dependência (Dá para melhorar)
@@ -20,7 +20,7 @@
 
 - `$ npm run test`
 
-- `$ npm dev:server`
+- `$ npm run dev:server`
 
 ##### Todas as informações são salvas em um arquivo json na camada de infra > data
 
