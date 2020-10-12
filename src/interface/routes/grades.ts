@@ -15,4 +15,12 @@ router.put('/:id',
 
 router.post('/', validation.validateAllFieldGradeBody(), gradeController.savaNewGrade);
 
+router.get('/media-grade/:type/:subject',
+  validation.validateTypeAndSubject(), gradeController.calculateAvaregeGradeValue);
+
+router.get('/melhores-grades/:type/:subject',
+  validation.validateTypeAndSubject(), gradeController.findBettersAvaregeGradeValue);
+
+router.get('/nota-total-aluno/:student/:subject', validation.validateSubjectAndStudent(), gradeController.checkTotalGradeValueForOneStudent);
+
 export default router;

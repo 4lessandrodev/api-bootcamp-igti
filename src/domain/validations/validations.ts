@@ -30,5 +30,21 @@ export const validation = {
       check('timestamp', 'Informe uma data e hora no formato ISO8601').isISO8601(),
       check('value', 'Informe um valor numérico para nota').isNumeric()
     ];
+  },
+  validateSubjectAndStudent: () => {
+    return (
+      [
+        param('subject', 'Informe um subject').isLength({ min: 2, max: 40 }),
+        param('student', 'Informe um student').isLength({ min: 2, max: 40 })
+      ]
+    );
+  },
+  validateTypeAndSubject: () => {
+    return (
+      [
+        param('subject', 'Informe um subject').isLength({ min: 2, max: 40 }),
+        param('type', 'Informe um type').isLength({ min: 2, max: 40 })
+      ]
+    );
   }
 };

@@ -73,5 +73,41 @@ export const gradeController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  calculateAvaregeGradeValue: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!(await checkErrors(req, res))) {
+        const { subject, type } = req.params;
+        res.status(200).json(await Grade.calculateAvaregeGradeValue('grades', type, subject, { findAll }));
+        logger.info(`Solicitado calculo da média ${JSON.stringify({ subject, type })}`);
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  checkTotalGradeValueForOneStudent: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!(await checkErrors(req, res))) {
+        const { student, subject } = req.params;
+        res.status(200).json(await Grade.checkTotalGradeValueForOneStudent('grades', student, subject, { findAll }));
+        logger.info(`Solicitado calculo da grade para o aluno ${JSON.stringify({ student, subject })}`);
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  findBettersAvaregeGradeValue: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!(await checkErrors(req, res))) {
+        const { subject, type } = req.params;
+        res.status(200).json(await Grade.findBettersAvaregeGradeValue('grades', type, subject, { findAll }));
+        logger.info(`Solicitado calculo das três melhores grades ${JSON.stringify({ type, subject })}`);
+      }
+    } catch (error) {
+      next(error);
+    }
   }
 };
