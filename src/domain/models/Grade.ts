@@ -8,12 +8,12 @@ import { IGrade } from '../interfaces/IGrade';
 import { IGradetMethods } from '../interfaces/IGradeMthods';
 
 export class Grade implements IGradetMethods {
- public id: number|null
- public student: string
- public subject: string
- public type: string
- public value: number
- public timestamp: string
+ readonly id: number|null
+ readonly student: string
+ readonly subject: string
+ readonly type: string
+ readonly value: number
+ readonly timestamp: string
  constructor (student:string, subject:string, type:string, value:number, timestamp:string, id:number|null) {
    this.id = id;
    this.student = student;
@@ -23,35 +23,19 @@ export class Grade implements IGradetMethods {
    this.timestamp = timestamp;
  }
 
- async calculateAvaregeGradeValue (filename: string, type: string, subject: string,
-   controller: IFindAllGradesRepository): Promise<number> {
-   const grades = await Grade.findAll(filename, controller);
-   return await calculateAvaregeGradeValue.exec(grades, type, subject);
- }
-
- async findBettersAvaregeGradeValue (filename: string, type: string, subject: string, controller: IFindAllGradesRepository): Promise<IGrade[]> {
-   const grades = await Grade.findAll(filename, controller);
-   return await findBettersAvaregeGradeValue.exec(grades, type, subject);
- }
-
- async checkTotalGradeValueForOneStudent (filename: string, student: string, subject: string, controller: IFindAllGradesRepository): Promise<number> {
+ static async checkTotalGradeValueForOneStudent (filename: string, student: string, subject: string, controller: IFindAllGradesRepository): Promise<number> {
    const grades = await Grade.findAll(filename, controller);
    return await checkTotalGradeValueForOneStudent.exec(grades, student, subject);
  }
 
- static async checkTotalGradeValueForOneStudent (filename: string, student: string, subject: string, controller: IFindAllGradesRepository): Promise<number> {
-   const grade = new Grade('', '', '', 0, '', null);
-   return await grade.checkTotalGradeValueForOneStudent(filename, student, subject, controller);
- }
-
  static async calculateAvaregeGradeValue (filename: string, type: string, subject: string, controller: IFindAllGradesRepository): Promise<number> {
-   const grade = new Grade('', '', '', 0, '', null);
-   return await grade.calculateAvaregeGradeValue(filename, type, subject, controller);
+   const grades = await Grade.findAll(filename, controller);
+   return await calculateAvaregeGradeValue.exec(grades, type, subject);
  }
 
  static async findBettersAvaregeGradeValue (filename: string, type: string, subject: string, controller: IFindAllGradesRepository): Promise<IGrade[]> {
-   const grade = new Grade('', '', '', 0, '', null);
-   return await grade.findBettersAvaregeGradeValue(filename, type, subject, controller);
+   const grades = await Grade.findAll(filename, controller);
+   return await findBettersAvaregeGradeValue.exec(grades, type, subject);
  }
 
  static init (student:string, subject:string, type:string, value:number, timestamp:string, id:number|null) {

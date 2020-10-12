@@ -1,8 +1,8 @@
 export interface IGrade {
-  id: number|null
-  student: string
-  subject: string
-  type: string
-  value: number
-  timestamp: string
+  readonly id: number|null
+  readonly student: string
+  readonly subject: string
+  readonly type: string
+  readonly value: number
+  readonly timestamp: string
 }
