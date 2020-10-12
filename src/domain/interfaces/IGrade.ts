@@ -4,5 +4,5 @@ export interface IGrade {
   subject: string
   type: string
   value: number
-  timestamp: Date
+  timestamp: string
 }
