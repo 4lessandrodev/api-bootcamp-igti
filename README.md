@@ -2,7 +2,7 @@
 
 #### O que tem de interessante neste projeto
 
-- Projeto desenvolvido todo em typscript
+- Projeto desenvolvido todo em typescript
 - Gerenciamento de erros > infra > middleware
 - Validação de fields > domain > validation
 - Gerenciamento de logs > infra > middleware
